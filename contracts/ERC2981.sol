@@ -29,6 +29,9 @@ contract ERC2981 is ERC721, Ownable {
         baseURI = _baseURI;
         royaltyReceiver = _royaltyReceiver;
         royaltyBasisPoints = _royaltyBasisPoints;
+        // We mint this token in the constructor just for testing purposes
+        // remove the next line from production code
+        _mint(msg.sender, 1);
     }
 
     // We signify support for ERC2981, ERC721 & ERC721Metadata
@@ -59,7 +62,7 @@ contract ERC2981 is ERC721, Ownable {
         royaltyAmount = getPercentageOf(_price, royaltyBasisPoints);
     }
 
-    // Uses basisPoints (i.e. 100% = 10000, 1% = 100)
+    // Represent percentages as basisPoints (i.e. 100% = 10000, 1% = 100)
     function getPercentageOf(
         uint256 _amount,
         uint16 _basisPoints
